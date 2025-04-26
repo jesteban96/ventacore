@@ -3,6 +3,7 @@ import axios from "axios";
 import CategoryForm from "../componets/CategoryForm";
 import CategoryTable from "../componets/CategoryTable";
 import API_URL from "../config/api";
+import Swal from "sweetalert2";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -30,15 +31,19 @@ const Categories = () => {
         await axios.put(`${API_URL}/categories/${category.id}/`, category, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        Swal.fire("Actualizado", "La categoría fue actualizada exitosamente.", "success");
       } else {
         await axios.post(`${API_URL}/categories/`, category, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        Swal.fire("Creado", "La categoría fue creada exitosamente.", "success");
       }
       fetchCategories();
       setEditingCategory(null); // 🔥 Limpia el formulario tras guardar
     } catch (error) {
       console.error("Error saving category", error);
+      const errorMessage = error.response?.data?.detail || "Error inesperado.";
+      Swal.fire("Error", errorMessage, "error"); // ✅ Mensaje del backend mostrado al usuario
     }
   };
 
