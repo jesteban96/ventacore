@@ -44,9 +44,8 @@ const Dashboard = () => {
   const ventasChartRef = React.useRef(null);
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-1 p-6">
+    <div className="flex h-full">
+      <div className="flex-1">
         {/* Contenedor para alinear el botón y el título */}
         <div className="flex items-center gap-3 mb-4">
           {/* Botón para abrir/cerrar el menú en móviles */}

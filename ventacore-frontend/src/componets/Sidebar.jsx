@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, BarChart, ShoppingCart, Users, Package, FileText, LogOut, ChevronDown } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { Menu, X, BarChart, ShoppingCart, Users, Package, FileText, LogOut, ChevronDown,LayoutDashboard } from "lucide-react";
 import useAuthStore from "../store/authStore";
 
 const Sidebar = () => {
@@ -26,7 +27,7 @@ const Sidebar = () => {
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed top-0 left-0 bg-blue-800 text-white w-64 p-5 transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0 h-screen" : "-translate-x-full h-screen"} md:translate-x-0 md:relative md:w-60`}>
+      <div className={`fixed top-0 left-0 bg-blue-800 text-white w-64 p-5 transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0 h-screen" : "-translate-x-full"} md:translate-x-0 md:relative md:w-60`}>
         {/* Título y botón cerrar en móviles */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Dashboard</h2>
@@ -39,7 +40,7 @@ const Sidebar = () => {
           <ul className="space-y-4">
             <li>
               <Link to="/dashboard" className="flex items-center p-3 hover:bg-blue-700 rounded">
-                <BarChart className="mr-3" /> Estadísticas
+                <LayoutDashboard className="mr-3" /> Dashboard
               </Link>
             </li>
 
@@ -70,7 +71,16 @@ const Sidebar = () => {
               {openMenu === "inventario" && (
                 <ul className="pl-6 space-y-2">
                   <li><Link to="/productos" className="block p-2 hover:bg-blue-600 rounded">Productos</Link></li>
-                  <li><Link to="/categorias" className="block p-2 hover:bg-blue-600 rounded">Categorías</Link></li>
+                  <li>
+                      <NavLink
+                        to="/categories"
+                        className={({ isActive }) =>
+                          `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`
+                        }
+                      >
+                        Categorías
+                    </NavLink>
+                  </li>
                   <li><Link to="/proveedores" className="block p-2 hover:bg-blue-600 rounded">Proveedores</Link></li>
                 </ul>
               )}

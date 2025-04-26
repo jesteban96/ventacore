@@ -1,9 +1,9 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/authStore";
+import Sidebar from "../componets/Sidebar"; // 🔹 Importamos el Sidebar
 
-const INACTIVITY_LIMIT = 15 * 60 * 1000; // 🔥 5 minutos de inactividad
+const INACTIVITY_LIMIT = 15 * 60 * 1000; // 🔥 15 minutos de inactividad
 
 const ProtectedRoute = () => {
   const { token, logout } = useAuthStore();
@@ -40,7 +40,19 @@ const ProtectedRoute = () => {
     };
   }, [token, logout, navigate]);
 
-  return token ? <Outlet /> : <Navigate to="/" />;
+  if (!token) return <Navigate to="/" />;
+
+  return (
+    <div className="flex h-screen">
+      {/* Sidebar fijo */}
+      <Sidebar />
+
+      {/* Contenido dinámico */}
+      <div className="flex-1 p-5">
+        <Outlet /> {/* Aquí se renderiza Dashboard o CategoryPage según la ruta */}
+      </div>
+    </div>
+  );
 };
 
 export default ProtectedRoute;

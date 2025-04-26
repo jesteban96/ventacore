@@ -6,7 +6,7 @@ const useAuthStore = create((set) => ({
 
   login: async (username, password) => {
     try {
-      const res = await axios.post("http://192.168.20.18:8000/auth/login", { username, password });
+      const res = await axios.post("http://127.0.0.1:8000/auth/login", { username, password });
       localStorage.setItem("token", res.data.access_token);
       set({ token: res.data.access_token });
       return true; // Login exitoso
@@ -16,7 +16,7 @@ const useAuthStore = create((set) => ({
     }
   },
 
-  logout: () => {
+  logout: () => { 
     localStorage.removeItem("token");
     set({ token: null });
   },
