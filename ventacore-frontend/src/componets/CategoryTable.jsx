@@ -23,7 +23,7 @@ const CategoryTable = ({ categories, onEdit, onDelete }) => {
       <table className="min-w-full bg-white border rounded-lg shadow-md">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
-            <th className="py-2 px-4 border">ID</th>
+            <th className="py-2 px-4 border">Codigo</th>
             <th className="py-2 px-4 border">Nombre</th>
             <th className="py-2 px-4 border">Acciones</th>
           </tr>

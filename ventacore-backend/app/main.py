@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Importar routers
 from app.routes.auth import router as auth_router  
 from app.routes.category import router as category_router  # Agregar categorías
+from app.routes.products import router as products_router
 
 app = FastAPI()
 
@@ -19,6 +20,7 @@ app.add_middleware(
 # 🔹 Agregar routers
 app.include_router(auth_router)
 app.include_router(category_router)  # Agregamos las rutas de categorías
+app.include_router(products_router)
 
 @app.get("/")
 def read_root():

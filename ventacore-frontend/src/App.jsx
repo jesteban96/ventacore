@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./componets/Dashboard";
 import ProtectedRoute from "./componets/ProtectedRoute";
 import Categories from "./pages/Categories"; 
+import ProductForm from "./pages/ProductsForm";
+import ProductsList from "./pages/ProductsList";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} /> {/* Nueva ruta */}
+          <Route path="/productsform" element={<ProductForm />} />
+          <Route path="/productslist" element={<ProductsList />} />
           <Route path="/*" />
         </Route>
       </Routes>
