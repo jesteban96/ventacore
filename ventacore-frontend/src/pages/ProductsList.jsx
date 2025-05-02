@@ -125,10 +125,14 @@ const ProductsList = () => {
 
       {editingProduct && (
         <ProductForm
-          editingProduct={editingProduct}
-          onSubmit={handleSave}
-          categories={categories}
-        />
+        editingProduct={editingProduct}
+        categories={categories}
+        onSaved={() => {
+          fetchProducts(); // ✅ Recarga sin refrescar la página completa
+          setEditingProduct(null); // Limpia selección de edición
+        }}
+      />
+      
       )}
 
       <ProductTable

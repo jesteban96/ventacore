@@ -20,6 +20,7 @@ const ProductsForm = () => {
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories", error);
+      Swal.fire("Error", "No se pudieron cargar las categorías", "error");
     }
   };
 
@@ -29,19 +30,19 @@ const ProductsForm = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       Swal.fire("¡Creado!", "Producto creado exitosamente.", "success");
+      return true; // ✅ Solo aquí limpiamos el formulario
     } catch (error) {
-      console.error("Error saving product", error);
-      Swal.fire("Error", "No se pudo guardar el producto", "error");
+      const message =
+        error.response?.data?.detail || "No se pudo guardar el producto";
+      Swal.fire("Error", message, "error");
+      return false; // ❌ No limpiamos el formulario
     }
   };
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Agregar Producto</h1>
-      <ProductForm 
-        onSubmit={handleSave}
-        categories={categories}
-      />
+      <ProductForm onSubmit={handleSave} categories={categories} />
     </div>
   );
 };

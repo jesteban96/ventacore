@@ -11,7 +11,7 @@ from ..schemas import UserCreate, UserLogin, UserResponse
 
 SECRET_KEY = "secretkey"  # 🔴 Cambia esto en producción
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 15
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router = APIRouter(prefix="/auth", tags=["Authentication"])
