@@ -48,13 +48,28 @@ const Categories = () => {
   };
 
   const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará la categoría.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    if (!result.isConfirmed) return;
+  
     try {
       await axios.delete(`${API_URL}/categories/${id}/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      Swal.fire("Eliminado", "La categoría fue eliminada.", "success");
       fetchCategories();
     } catch (error) {
-      console.error("Error deleting category", error);
+      const msg = error.response?.data?.detail || "No se pudo eliminar la categoría.";
+      Swal.fire("Error", msg, "error");
     }
   };
 

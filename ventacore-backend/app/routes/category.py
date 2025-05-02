@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+from app.models import Product  # Asegúrate de importar Product
 
 from app.database import get_db
 from app.models import Category
@@ -61,10 +62,23 @@ def update_category(
     return db_category
 
 @router.delete("/{category_id}")
-def delete_category(category_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+def delete_category(
+    category_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
     db_category = db.query(Category).filter(Category.id == category_id).first()
     if not db_category:
         raise HTTPException(status_code=404, detail="Categoría no encontrada")
+
+    # 🔥 Verificar si hay productos asociados a esta categoría
+    products_with_category = db.query(Product).filter(Product.category_id == category_id).first()
+    if products_with_category:
+        raise HTTPException(
+            status_code=400,
+            detail="No se puede eliminar la categoría porque tiene productos asociados."
+        )
+
     db.delete(db_category)
     db.commit()
-    return {"message": "Categoría eliminada exitosamente"}
+    return {"message": "Categoría eliminada correctamente"}
