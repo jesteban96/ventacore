@@ -10,6 +10,7 @@ const Sidebar = () => {
   const [openProductos, setOpenProductos] = useState(false);   // 👈 Controla solo Productos
   const [openVentas, setOpenVentas] = useState(false);
   const [openFinanzas, setOpenFinanzas] = useState(false);
+  const [openProovedores, setOpenProovedores] = useState(false);
 
   const navigate = useNavigate();
 
@@ -73,11 +74,19 @@ const Sidebar = () => {
 
               {openInventario && (
                 <ul className="pl-6 space-y-2">
+
+                  {/* Categorías */}
+                  <li>
+                    <NavLink to="/categories" className={({ isActive }) => `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+                      Categorías
+                    </NavLink>
+                  </li>
+
                   {/* Productos (Submenú) */}
                   <li>
                     <button className="flex items-center justify-between w-full p-3 hover:bg-blue-600 rounded" onClick={() => setOpenProductos(!openProductos)}>
                       <div className="flex items-center">
-                        <PackageOpen className="mr-3" /> Productos
+                        Productos
                       </div>
                       <ChevronDown className={`transform transition-transform ${openProductos ? "rotate-180" : "rotate-0"}`} />
                     </button>
@@ -97,18 +106,28 @@ const Sidebar = () => {
                     )}
                   </li>
 
-                  {/* Categorías */}
-                  <li>
-                    <NavLink to="/categories" className={({ isActive }) => `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
-                      Categorías
-                    </NavLink>
-                  </li>
-
                   {/* Proveedores */}
                   <li>
-                    <NavLink to="/proveedores" className="block p-2 hover:bg-blue-600 rounded">
-                      Proveedores
-                    </NavLink>
+                    <button className="flex items-center justify-between w-full p-3 hover:bg-blue-600 rounded" onClick={() => setOpenProovedores(!openProovedores)}>
+                      <div className="flex items-center">
+                        Proovedores
+                      </div>
+                      <ChevronDown className={`transform transition-transform ${openProovedores ? "rotate-180" : "rotate-0"}`} />
+                    </button>
+                    {openProovedores && (
+                      <ul className="pl-6 space-y-2">
+                        <li>
+                          <NavLink to="/suppliersform" className={({ isActive }) => `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+                            Agregar Proovedores
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/supplierslist" className={({ isActive }) => `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+                            Ver Proovedores
+                          </NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                 </ul>
               )}

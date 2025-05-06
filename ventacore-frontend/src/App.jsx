@@ -6,6 +6,8 @@ import ProtectedRoute from "./componets/ProtectedRoute";
 import Categories from "./pages/Categories"; 
 import ProductForm from "./pages/ProductsForm";
 import ProductsList from "./pages/ProductsList";
+import SuppliersForm from "./pages/SuppliersForm";
+import SuppliersList from "./pages/SuppliersList";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/categories" element={<Categories />} /> {/* Nueva ruta */}
           <Route path="/productsform" element={<ProductForm />} />
           <Route path="/productslist" element={<ProductsList />} />
+          <Route path="/suppliersform" element={<SuppliersForm/>}/>
+          <Route path="/supplierslist" element={<SuppliersList/>}/>
           <Route path="/*" />
         </Route>
       </Routes>
