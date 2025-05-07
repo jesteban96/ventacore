@@ -27,7 +27,7 @@ const Sidebar = () => {
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed top-0 left-0 bg-blue-800 text-white w-64 p-5 transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0 h-screen" : "-translate-x-full"} md:translate-x-0 md:relative md:w-60`}>
+      <div className={`fixed h-screen overflow-y-auto top-0 left-0 bg-blue-800 text-white w-64 p-5 transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0 h-screen" : "-translate-x-full"} md:translate-x-0 md:relative md:w-60`}>
         
         {/* Título y botón cerrar */}
         <div className="flex justify-between items-center mb-6">
