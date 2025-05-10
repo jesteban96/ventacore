@@ -129,6 +129,14 @@ const Sidebar = () => {
                       </ul>
                     )}
                   </li>
+
+                  {/* Compras */}
+                  <li>
+                    <NavLink to="/purchasesform" className={({ isActive }) => `block p-2 rounded ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+                      Registrar Compra
+                    </NavLink>
+                  </li>
+                  
                 </ul>
               )}
             </li>

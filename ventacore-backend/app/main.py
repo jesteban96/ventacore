@@ -6,6 +6,7 @@ from app.routes.auth import router as auth_router
 from app.routes.category import router as category_router  # Agregar categorías
 from app.routes.products import router as products_router
 from app.routes.supplier import router as supplier_router
+from app.routes.purchases import router as purchases_router
 
 app = FastAPI()
 
@@ -23,6 +24,7 @@ app.include_router(auth_router)
 app.include_router(category_router)  # Agregamos las rutas de categorías
 app.include_router(products_router)
 app.include_router(supplier_router)
+app.include_router(purchases_router)
 
 
 @app.get("/")

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 class UserCreate(BaseModel):
@@ -85,5 +85,33 @@ class SupplierOut(SupplierBase):
     id: int
     created_at: datetime
 
+    class Config:
+        orm_mode = True
+
+class PurchaseItemCreate(BaseModel):
+    product_id: int
+    quantity: int
+    purchase_price: float
+    tax: Optional[float] = 0.0
+    total: float
+    suggested_price: Optional[float]
+
+class PurchaseCreate(BaseModel):
+    invoice_number: str
+    supplier_id: int
+    items: List[PurchaseItemCreate]
+
+class PurchaseItemResponse(PurchaseItemCreate):
+    id: int
+    product_id: int
+    class Config:
+        orm_mode = True
+
+class PurchaseResponse(BaseModel):
+    id: int
+    invoice_number: str
+    supplier_id: int
+    date: datetime
+    items: List[PurchaseItemResponse]
     class Config:
         orm_mode = True
